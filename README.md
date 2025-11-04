@@ -9,6 +9,8 @@
 
 ## <a id="ptbr"></a>🇧🇷 Português (BR)
 
+> **Observação:** Este repositório refere-se à versão **v0.0.2.0** do Projeto COMPRESSION MANAGER. Apoie o projeto e adquira a versão paga através do link: [Instalar via Microsoft Store](https://apps.microsoft.com/detail/9PJMT90R953K)
+
 <details>
 <summary>Clique para expandir o README em português</summary>
 
@@ -232,6 +234,8 @@ The license for original unRAR code has the following restriction:
 </details>
 
 ## <a id="enus"></a>🇺🇸 English (US)
+
+> **Note:** This repository refers to the **v0.0.2.0** version of the COMPRESSION MANAGER Project. Support the project and purchase the paid version through the link: [Instalar via Microsoft Store](https://apps.microsoft.com/detail/9PJMT90R953K)
 
 <details>
 <summary>Click to expand the README in English</summary>
