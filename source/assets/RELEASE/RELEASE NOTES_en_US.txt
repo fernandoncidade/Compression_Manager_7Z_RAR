@@ -1,3 +1,28 @@
+RELEASE NOTES: Version 2026.8.9.0
+August 9, 2026
+
+What was done:
+- Added support for packing files in the RAR format.
+- Implemented a new dual layout in the interface, allowing for a more organized management of compression options.
+- Adjusted the interface to dynamically adapt to the new screen layout.
+- The internal version management system now automatically synchronizes the date with the operating system.
+- The built-in instruction manual and system languages were updated to cover these new features.
+
+What this means for you:
+- You can now create RAR archives directly from the application.
+- Interface navigation is more flexible, making better use of screen space with the new layout.
+- Faster and more organized internal processes.
+
+How to verify:
+- Update and open the program.
+- Check for the availability of the RAR format in the packing options.
+- Test the new interface arrangement when configuring your files and resizing the window.
+- Access the user manual to see the updated instructions.
+
+
+__________________________________________________________
+
+
 RELEASE NOTES: Version: 0.0.4.0
 December 9, 2025
 

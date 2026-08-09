@@ -2,7 +2,7 @@ import sys
 from queue import Queue
 from PySide6.QtCore import QCoreApplication
 from PySide6.QtWidgets import (QMainWindow, QFileDialog, QTreeView, QMessageBox)
-from source.MotoresCompressao.mtcomp_02_motoresCompressao import (buscar_winrar_executavel, buscar_sevenzip_executavel, CompressaoRAR, CompressaoZIP, Compressao7Z, CompressaoTAR, CompressaoWIM, TesteIntegridade, Extracao)
+from source.MotoresCompressao.mtcomp_02_motoresCompressao import (buscar_sevenzip_executavel, buscar_winrar_executavel, CompressaoRAR, CompressaoZIP, Compressao7Z, CompressaoTAR, CompressaoWIM, TesteIntegridade, Extracao)
 from .ui_03_dragDrop import DragDropListWidget
 from .ui_04_dialogTraducao import FileDialogTraduzivel, MessageBoxTraduzivel
 from source.utils.LogManager import LogManager
@@ -25,13 +25,10 @@ class GerenciadorInterface(QMainWindow):
         self.last_directory = None
 
         self.winrar_executavel = buscar_winrar_executavel()
-        if not self.winrar_executavel:
-            print("WinRAR não encontrado. Por favor, instale o WinRAR e tente novamente.")
-            exit(1)
-
         self.sevenzip_executavel = buscar_sevenzip_executavel()
-        if not self.sevenzip_executavel:
-            print("7-Zip não encontrado. Por favor, instale o 7-Zip e tente novamente.")
+
+        if not self.sevenzip_executavel and not self.winrar_executavel:
+            print("7-Zip e WinRAR não encontrados. Por favor, instale um deles e tente novamente.")
             exit(1)
 
         self.output_listbox_rar = DragDropListWidget(accept_folders_only=True)
@@ -47,7 +44,7 @@ class GerenciadorInterface(QMainWindow):
         self.init_threads()
 
     def init_threads(self):
-        self.compress_thread_rar = CompressaoRAR(self.winrar_executavel, self.update_existing, self.output_listbox_rar, self.folder_listbox)
+        self.compress_thread_rar = CompressaoRAR(self.winrar_executavel, self.update_existing, self.output_listbox, self.folder_listbox)
         self.compress_thread_rar.finished.connect(self.on_compress_finished)
 
         self.compress_thread_zip = CompressaoZIP(self.sevenzip_executavel, self.update_existing, self.output_listbox, self.folder_listbox)
@@ -76,7 +73,6 @@ class GerenciadorInterface(QMainWindow):
 
     def browse_output(self):
         self._browse(QFileDialog.FileMode.Directory, self.output_listbox)
-        self._browse(QFileDialog.FileMode.Directory, self.output_listbox_rar)
         self._browse(QFileDialog.FileMode.Directory, self.output_listbox_zip)
         self._browse(QFileDialog.FileMode.Directory, self.output_listbox_7z)
         self._browse(QFileDialog.FileMode.Directory, self.output_listbox_tar)
@@ -85,6 +81,8 @@ class GerenciadorInterface(QMainWindow):
 
     def _browse(self, file_mode, listbox):
         import os
+
+        target_listboxes = listbox if isinstance(listbox, (list, tuple)) else [listbox]
 
         if sys.platform == "win32" and file_mode == QFileDialog.FileMode.Directory:
             dialog = FileDialogTraduzivel()
@@ -106,15 +104,16 @@ class GerenciadorInterface(QMainWindow):
                 if dialog.exec() == QFileDialog.DialogCode.Accepted:
                     selected_dirs = dialog.selectedFiles()
                     if selected_dirs:
-                        for dir_path in selected_dirs:
-                            exists = False
-                            for i in range(listbox.count()):
-                                if listbox.item(i).text() == dir_path:
-                                    exists = True
-                                    break
+                        for lb in target_listboxes:
+                            for dir_path in selected_dirs:
+                                exists = False
+                                for i in range(lb.count()):
+                                    if lb.item(i).text() == dir_path:
+                                        exists = True
+                                        break
 
-                            if not exists:
-                                listbox.addItem(dir_path)
+                                if not exists:
+                                    lb.addItem(dir_path)
 
                         self.last_directory = os.path.dirname(selected_dirs[0])
 
@@ -163,7 +162,15 @@ class GerenciadorInterface(QMainWindow):
         if dialog.exec() == QFileDialog.DialogCode.Accepted:
             selected_items = dialog.selectedFiles()
             if selected_items:
-                listbox.addItems(selected_items)
+                for lb in target_listboxes:
+                    for item in selected_items:
+                        exists = False
+                        for i in range(lb.count()):
+                            if lb.item(i).text() == item:
+                                exists = True
+                                break
+                        if not exists:
+                            lb.addItem(item)
                 self.last_directory = os.path.dirname(selected_items[0])
 
     def select_output_path(self, output_listbox):
@@ -198,7 +205,7 @@ class GerenciadorInterface(QMainWindow):
         self.output_listbox_tar.clear()
         self.output_listbox_wim.clear()
         self.output_listbox_extracao.clear()
-    
+
     def clear_output_listbox_rar(self):
         self.output_listbox_rar.clear()
 
@@ -216,7 +223,7 @@ class GerenciadorInterface(QMainWindow):
 
     def clear_output_listbox_extracao(self):
         self.output_listbox_extracao.clear()
-    
+
     def store_as_rar(self):
         self._store_as(self.compress_thread_rar, self.output_listbox_rar, self.compression_method_rar)
 

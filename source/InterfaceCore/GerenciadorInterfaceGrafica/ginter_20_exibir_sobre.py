@@ -31,7 +31,7 @@ def exibir_sobre(app):
             "pt_BR": (
                 "COMPRESSION MANAGER é um utilitário gráfico leve para Windows projetado para "
                 "empacotamento, extração e verificação de integridade de arquivos e pastas. "
-                "Oferece suporte a múltiplos formatos (ZIP, 7Z, TAR, WIM e outros reconhecidos "
+                "Oferece suporte a múltiplos formatos (RAR, ZIP, 7Z, TAR, WIM e outros reconhecidos "
                 "pelo 7‑Zip), seleção de vários diretórios de saída, métodos de compressão "
                 "configuráveis, fila de processos e operação via arrastar-e-soltar. A interface "
                 "é multilíngue (pt_BR / en_US) e preparada para empacotamento como executável "
@@ -40,7 +40,7 @@ def exibir_sobre(app):
             "en_US": (
                 "COMPRESSION MANAGER is a lightweight graphical utility for Windows designed "
                 "for packing, extracting and integrity checking of files and folders. It "
-                "supports multiple formats (ZIP, 7Z, TAR, WIM and others recognized by 7‑Zip), "
+                "supports multiple formats (RAR, ZIP, 7Z, TAR, WIM and others recognized by 7‑Zip), "
                 "selection of multiple output directories, configurable compression methods, "
                 "process queuing and drag-and-drop operation. The interface is multilingual "
                 "(pt_BR / en_US) and prepared for packaging as an executable (distribution "
@@ -67,7 +67,7 @@ def exibir_sobre(app):
 
         cabecalho_fixo = (
             "<h3>COMPRESSION MANAGER</h3>"
-            f"<p><b>{get_text('Versão')}:</b> 0.0.4.0</p>"
+            f"<p><b>{get_text('Versão')}:</b> 2026.8.9.0</p>"
             f"<p><b>{get_text('Autores')}:</b> Fernando Nillsson Cidade</p>"
             f"<p><b>{get_text('Descrição')}:</b> {texto_descricao}</p>"
         )

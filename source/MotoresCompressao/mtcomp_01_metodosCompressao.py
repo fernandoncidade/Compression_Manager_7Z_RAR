@@ -45,7 +45,7 @@ class MenuPersistente(QMenu):
 
 
 def get_translated_legends():
-    legends_winrar = {
+    legends_rar = {
         "0": f"0 - {QCoreApplication.translate('CompressLevels', 'Armazenar')}",
         "1": f"1 - {QCoreApplication.translate('CompressLevels', 'Mais Rápido')}",
         "2": f"2 - {QCoreApplication.translate('CompressLevels', 'Rápido')}",
@@ -68,7 +68,7 @@ def get_translated_legends():
     }
 
     return {
-        'winrar': legends_winrar,
+        'rar': legends_rar,
         '7z_zip': legends_7zip_zip,
         'tar_wim': legends_tar_wim
     }
@@ -100,7 +100,7 @@ class MetodoCompressao:
 
         legends = get_translated_legends()
 
-        self.add_submenu(self.compression_menu, 'RAR (0-5)', legends['winrar'], CompressType.RAR)
+        self.add_submenu(self.compression_menu, 'RAR (0-5)', legends['rar'], CompressType.RAR)
         self.add_submenu(self.compression_menu, 'ZIP (0-9)', legends['7z_zip'], CompressType.ZIP)
         self.add_submenu(self.compression_menu, '7Z (0-9)', legends['7z_zip'], CompressType.SEVEN_Z)
         self.add_submenu(self.compression_menu, 'TAR (0)', legends['tar_wim'], CompressType.TAR)
@@ -146,6 +146,8 @@ class MetodoCompressao:
             compress_type_value = compress_type.value
 
             setattr(self.gerenciador_interface, f'compression_method_{compress_type_value}', method)
+            if hasattr(self, 'gerenciador_interface_2') and self.gerenciador_interface_2 is not None:
+                setattr(self.gerenciador_interface_2, f'compression_method_{compress_type_value}', method)
 
             if compress_type_value in self.method_actions:
                 for m, action in self.method_actions[compress_type_value].items():
@@ -166,6 +168,8 @@ class MetodoCompressao:
                     if config_key in config:
                         method = config[config_key]
                         setattr(self.gerenciador_interface, f'compression_method_{compress_type.value}', method)
+                        if hasattr(self, 'gerenciador_interface_2') and self.gerenciador_interface_2 is not None:
+                            setattr(self.gerenciador_interface_2, f'compression_method_{compress_type.value}', method)
 
         except FileNotFoundError:
             pass

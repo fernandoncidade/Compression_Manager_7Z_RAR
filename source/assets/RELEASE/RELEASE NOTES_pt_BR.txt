@@ -1,3 +1,28 @@
+NOTAS DE LANÇAMENTO: Versão 2026.8.9.0
+9 de agosto de 2026
+
+O que foi feito:
+- Adicionado suporte para empacotamento de arquivos no formato RAR.
+- Implementação de um novo layout duplo na interface, permitindo gerenciar as opções de compressão de forma mais organizada.
+- Ajuste na interface para se adaptar dinamicamente ao novo formato de tela.
+- O sistema interno de gerenciamento de versões agora sincroniza a data automaticamente com o sistema operacional.
+- O manual de instruções interno e os idiomas do sistema foram atualizados para abranger essas novidades.
+
+O que muda para você:
+- Agora você pode criar arquivos RAR diretamente pelo aplicativo.
+- A navegação na interface ficou mais flexível, aproveitando melhor o espaço da tela com o novo layout.
+- Processos internos mais ágeis e organizados.
+
+Como verificar:
+- Atualize e abra o programa.
+- Verifique a disponibilidade do formato RAR nas opções de empacotamento.
+- Teste a nova disposição da interface ao configurar seus arquivos e redimensionar a janela.
+- Acesse o manual do usuário para ver as instruções atualizadas.
+
+
+__________________________________________________________
+
+
 NOTAS DE LANÇAMENTO: Versão: 0.0.4.0
 09 de Dezembro de 2025
 
